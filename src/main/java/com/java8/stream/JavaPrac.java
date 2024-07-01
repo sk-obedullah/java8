@@ -40,6 +40,7 @@ public class JavaPrac {
 				j = i + 1;
 				i++;
 			}
+			
 		}
 	}
 }
