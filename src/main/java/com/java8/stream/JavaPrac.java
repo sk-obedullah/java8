@@ -1,19 +1,24 @@
 package com.java8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class JavaPrac {
 
 	public static void main(String[] args) {
-//		String s="abc";
+//		String s="abc"+'c';
+//		System.out.println(s);
+//		char charAt = s.charAt(1);
 //		String revStr="";
 //		for(int i=0; i<s.length(); i++){
 //			revStr=s.charAt(i)+revStr;
 //		}
 //		System.out.println(revStr);
 
-		String s = "Pradeep";
+//		String s = "Pradeep";
 //		System.out.println(s.length());
 //		for (int i = s.length() - 1; i >= 0; i--) {
 //			System.out.print(s.charAt(i));
@@ -24,6 +29,19 @@ public class JavaPrac {
 
 //		int i=9;
 //		int j=09;
+		
+		
+		String inputString = "Java Concept Of The Day";
+		List<String> asList = Arrays.asList(inputString.split(""));
+		List<String> unique=new ArrayList<>();
+		for(String str:asList) {
+			
+			if(!unique.contains(str)) {
+				unique.add(str);
+			};
+			
+		}
+		System.out.println(unique);
 
 	}
 

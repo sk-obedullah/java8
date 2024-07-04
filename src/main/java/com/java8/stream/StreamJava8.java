@@ -1,6 +1,7 @@
 package com.java8.stream;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -79,7 +80,7 @@ public class StreamJava8 {
 				.collect(Collectors.toList());
 		System.out.println(dishWithHighCalInSortingByHandlingNullLast);
 
-		// get the repeated words in a stream
+		// get the repeated words in a List
 
 		List<String> asList = Arrays.asList("java", "java", "spring");
 		Map<String, Long> collect = asList.stream()
@@ -94,7 +95,7 @@ public class StreamJava8 {
 //		                        toSet())));
 
 		List<String> listString = Arrays.asList("java", "java", "spring");
-		listString.stream().distinct().collect(Collectors.toList()).forEach(System.out::println);
+		listString.stream().distinct().collect(Collectors.toList());
 
 		// Using of FlatMap--------------------//
 
@@ -110,13 +111,18 @@ public class StreamJava8 {
 		// "l", "o","W", "r","d"]
 		// words.stream().map(word->word.split(""))=Stream<String[]>
 //		words.stream().map(word->word.split("")).flatMap(Arrays::stream)=Stream<String>
-		List<String> words = Arrays.asList(new String[] { "Hello", "World" });
+		List<String> words = Arrays.asList(new String[] { "Hello", "Hello" });
 		List<String[]> collect3 = words.stream().map(word -> word.split("")).collect(Collectors.toList());
 		System.out.println(collect3);
 		List<String> collect2 = words.stream().map(word -> word.split("")).flatMap(Arrays::stream).distinct()
 				.collect(Collectors.toList());
 		System.out.println(collect2);
 
+//		String ms="apple";
+//		String[] split2 = ms.split("");
+//	 Stream<Stream<String[]>> a
+//	 Stream<String[]>
+//	 [HelloH"e","l","l","o"]
 		/*
 		 * How would you extend the previous example to return only pairs whose sum is
 		 * divisible by 3? For example, (2, 4) and (3, 3)
@@ -126,6 +132,8 @@ public class StreamJava8 {
 				.flatMap(i -> numbers2.stream().filter(j -> (i + j) % 3 == 0).map(k -> new int[] { i, k }))
 				.collect(Collectors.toList());
 		System.out.println(collect4);
+
+		// -------------------------------------------------------------------------------------------//
 
 //			Given a list of integers, separate odd and even numbers?
 
@@ -148,13 +156,24 @@ public class StreamJava8 {
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		System.out.println(collect7);
 
+		Map<String, Long> collect21 = Arrays.stream(inputString.split(""))
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println("+++++++" + collect21);
+
 //	         find frequency of each word in a para using Java 8 streams?
 
+		System.out.println("******************************************************");
+
 		String inputPara = "For those who are interested in finding random paragraphs, that's exactly what this webpage provides. If both a random word and a random sentence aren't quite long enough for your needs, then a random paragraph might be the perfect solution. Once you arrive at this page, you'll see a random paragraph. If you need another one, all you need to do is click on the \"next paragraph\" button. If you happen to need several random paragraphs all at once, you can use this other paragraph generator. Below you can find a number of ways that this generator. generator can be used";
-		Map<String, Long> collect8 = Arrays.asList(inputPara.split(" ")).stream().peek(System.out::println)
+		String[] split2 = inputPara.split(" ");
+		System.out.println(split2);
+		System.out.println(Arrays.toString(split2));
+		List<String> asList2 = Arrays.asList(split2);
+
+		Map<String, Long> collect8 = asList2.stream().peek(System.out::println)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		System.out.println(collect8);
-
+		System.out.println("******************************************************");
 //		find frequency of each element in an array or a list?
 
 		List<String> stationeryList = Arrays.asList("Pen", "Eraser", "Note Book", "Pen", "Pencil", "Stapler",
@@ -165,19 +184,19 @@ public class StreamJava8 {
 
 //		 sort the given list of decimals in sorting order?
 		List<Double> decimalList = Arrays.asList(12.45, 23.58, 17.13, 42.89, 33.78, 71.85, 56.98, 21.12);
-		List<Double> collect10 = decimalList.stream().sorted(Comparator.comparing(a -> a)).collect(Collectors.toList());
+		List<Double> collect10 = decimalList.stream().sorted().collect(Collectors.toList());
+		System.out.println("__________******************************************************");
 		System.out.println(collect10);
 
 //		 sort the given list of decimals in reverse Sorting order?
 		List<Double> decimalList2 = Arrays.asList(12.45, 23.58, 17.13, 42.89, 33.78, 71.85, 56.98, 21.12);
-		List<Double> collect11 = decimalList2.stream().sorted(Comparator.comparing(a -> a, Comparator.reverseOrder()))
-				.collect(Collectors.toList());
+		List<Double> collect11 = decimalList2.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		System.out.println(collect11);
 
 //		 Given a list of strings, join the strings with ‘[‘ as prefix, ‘]’ as suffix and ‘,’ as delimiter?
 
 		List<String> listOfStrings1 = Arrays.asList("Facebook", "Twitter", "YouTube", "WhatsApp", "LinkedIn");
-		String collect12 = listOfStrings1.stream().collect(Collectors.joining(", ", "[", "]"));
+		String collect12 = listOfStrings1.stream().collect(Collectors.joining("-", "\"", "\""));
 		System.out.println(collect12);
 
 //		 From the given list of integers, print the numbers which are multiples of 5?
@@ -323,71 +342,39 @@ public class StreamJava8 {
 		Map<String, Long> collect19 = listOfStrings4.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		System.out.println(collect19);
+		Collection<Long> values = collect19.values();
+		System.out.println("values-" + values);
+		Long long1 = values.stream().max(Comparator.naturalOrder()).get();
+		System.out.println("Max Value-- " + long1);
 		Entry<String, Long> entry = collect19.entrySet().stream().max(Map.Entry.comparingByValue()).get();
 		System.out.println("maximum time repeated word- " + entry.getKey());
 		System.out.println("number of occureances " + entry.getValue());
 		System.out.println("-------------------------------------------------");
 
 //		Given a list of strings, find out those strings which start with a number?
-		
-		 List<String> listOfStrings3 = Arrays.asList("One", "2wo", "3hree", "Four", "5ive", "Six");
-		 listOfStrings3.stream().filter(abc->Character.isDigit(abc.charAt(0))).forEach(System.out::println);
-		 System.out.println("-------------------------------------------------");
-	
+
+		List<String> listOfStrings3 = Arrays.asList("One", "2wo", "3hree", "Four", "5ive", "Six");
+		listOfStrings3.stream().filter(abc -> Character.isDigit(abc.charAt(0))).forEach(System.out::println);
+		System.out.println("-------------------------------------------------");
+
 //		 How do you extract duplicate elements from an array?
-		 
-		 List<Integer> listOfIntegers5 = Arrays.asList(111, 222, 333, 111, 555, 333, 777, 222);
-		 Set<Integer> uniqueSet =new HashSet<>();
-		 Set<Integer> suplicates = listOfIntegers5.stream().filter(elm-> !uniqueSet.add(elm)).collect(Collectors.toSet());
-		 System.out.println("duplicate elements from an array - "+suplicates);
-	
-		 System.out.println("-------------------------------------------------");
-		 
+
+		List<Integer> listOfIntegers5 = Arrays.asList(111, 222, 333, 111, 555, 333, 777, 222);
+		Set<Integer> uniqueSet = new HashSet<>();
+		Set<Integer> suplicates = listOfIntegers5.stream().filter(elm -> !uniqueSet.add(elm))
+				.collect(Collectors.toSet());
+		System.out.println("duplicate elements from an array - " + suplicates);
+
+		System.out.println("-------------------------------------------------");
+
 //		 Print duplicate characters in a string?
-				 
-		 String inputString7 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
-		 System.out.println(inputString7);
-		 Set<String> uniqueCharSet=new HashSet<>();
-		 Set<String> collect20 = Arrays.stream(inputString7.split("")).filter(str1->!uniqueCharSet.add(str1)).collect(Collectors.toSet());
-		 System.out.println("Duplicates- "+collect20);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		String inputString7 = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+		System.out.println(inputString7);
+		Set<String> uniqueCharSet = new HashSet<>();
+		Set<String> collect20 = Arrays.stream(inputString7.split("")).filter(str1 -> !uniqueCharSet.add(str1))
+				.collect(Collectors.toSet());
+		System.out.println("Duplicates- " + collect20);
+
 	}
 }
