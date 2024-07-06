@@ -2,8 +2,10 @@ package com.java8.stream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JavaPrac {
@@ -26,9 +28,11 @@ public class JavaPrac {
 
 //		String collect = Arrays.stream(s.split("")).collect(Collectors.);
 //		System.out.println(collect);
-
+//
 //		int i=9;
 //		int j=09;
+		
+		Map<int, String> s=new HashMap<>();
 		
 		
 		String inputString = "Java Concept Of The Day";
@@ -41,6 +45,7 @@ public class JavaPrac {
 			};
 			
 		}
+		
 		System.out.println(unique);
 
 	}

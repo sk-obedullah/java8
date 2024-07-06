@@ -376,5 +376,26 @@ public class StreamJava8 {
 				.collect(Collectors.toSet());
 		System.out.println("Duplicates- " + collect20);
 
+		// Reverse words of a string
+
+		String strPara = "i love java and react js";
+
+		String[] split3 = strPara.split(" ");
+		String collect22 = IntStream.rangeClosed(1, split3.length).mapToObj(idx -> split3[split3.length - idx ])
+				.collect(Collectors.joining(" "));
+		System.out.println(collect22);
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
