@@ -39,6 +39,7 @@ public class StreamJava8 {
 	 */
 
 	public static void main(String[] args) {
+		
 		List<Dish> dishes = Arrays.asList(new Dish("dish1", 100, "veg"), new Dish("dish2", 600, "veg"),
 				new Dish("dish3", 400, "veg"), new Dish("dish4", 200, "veg"), new Dish("dish5", 160, "veg"),
 				new Dish("dish6", 500, "veg"));
