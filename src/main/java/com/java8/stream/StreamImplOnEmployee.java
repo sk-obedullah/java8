@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamImplOnEmployee {
 
@@ -31,6 +32,7 @@ public class StreamImplOnEmployee {
 		employeeList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
 		employeeList.add(new Employee(277, "Anuj Chettiar", 31, "Male", "Product Development", 2012, 35700.0));
 		employeeList.add(new Employee(288, "Anuj Patil", 31, "Others", "IT Development", 2012, 35000.0));
+		employeeList.add(new Employee(288, "Anuj Patil", 35, "Others", "IT Development", 2013, 32000.0));
 
 //		 How many male and female employees are there in the organization?
 
@@ -142,6 +144,24 @@ public class StreamImplOnEmployee {
 		Employee employee3 = employeeList.stream().max(Comparator.comparing(Employee::getAge)).get();
 
 		System.out.println(employee3);
+
+		// 142. java 8 program to find the employee name starts with A and salary is
+		// greater than 500000?
+		List<String> collect16 = employeeList.stream()
+				.filter(emp -> emp.name.startsWith("A") && emp.getSalary() < 25000).map(emp -> emp.getName())
+				.collect(Collectors.toList());
+
+		System.out.println(collect16);
+
+		// 141. Find the duplicate employeeName in given list
+
+	 
+
+		Map<String, List<Employee>> collect17 = employeeList.stream().collect(Collectors.groupingBy(Employee::getName));
+		List<Employee> collect18 = collect17.values().stream().filter(empList -> empList.size() > 1)
+				.flatMap(list -> list.stream()).collect(Collectors.toList());
+
+		System.out.println(collect18);
 
 	}
 }

@@ -2,6 +2,7 @@ package com.java8.stream;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -225,6 +226,8 @@ public class StreamJava8 {
 
 		int[] array = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).sorted().toArray();
 		System.out.println(Arrays.toString(array));
+		
+		 
 
 		System.out.println("-------------------------------------------------");
 
