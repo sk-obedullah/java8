@@ -63,6 +63,9 @@ public class StreamImplOnEmployee {
 		Optional<Employee> collect4 = employeeList.stream()
 				.collect(Collectors.maxBy(Comparator.comparing(Employee::getSalary)));
 		System.out.println("Highest paid employee -> " + collect4.get());
+		
+		Employee employee4 = employeeList.stream().max(Comparator.comparing(Employee::getSalary)).get();
+		System.out.println("-----------------"+employee4);
 
 //		 Get the names of all employees who have joined after 2015?
 

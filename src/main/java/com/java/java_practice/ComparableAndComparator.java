@@ -16,8 +16,10 @@ public class ComparableAndComparator {
 			return emp1.getName().compareToIgnoreCase(emp2.getName());
 		};
 		
+		Comparator<Employee> nameComp=Comparator.comparing(Employee::getName);
+		
 //		Collections.sort(of);
-		Collections.sort(of, nameComparator);
+		Collections.sort(of, nameComp);
 		System.out.println(of.toString());
 	}
 }
